@@ -25,4 +25,18 @@ class JobController extends AbstractController
     {
         return $this->render('job/acceuil.html.twig');
     }
+    /**
+     * @Route("/voir/{id}", name="voir" ,requirements={"id"="\d+"})
+     */
+    public function voir($id){
+        
+       return $this->render('job/voir.html.twig',['id'=>$id]);
+       //return new Response("hello my new name ".$id);
+    }
+
+    public function ajouter($nom){
+        
+    }
+
+
 }
