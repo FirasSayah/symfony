@@ -1,20 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PostController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/symfony-project/src/Controller/PostController.php'|file_link(0) }}">src/Controller/PostController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/symfony-project/templates/post/index.html.twig'|file_link(0) }}">templates/post/index.html.twig</a></code></li>
-    </ul>
+    <h2 class="text-center p-3">Tous les données</h2>
+    </br></br>
+   <table class="table table-striped table-hover">
+    <tr class="table-secondary">
+    <th>ID</th>
+    <th>Title</th>
+    <th>Action</th>
+    </tr>
+        {% for post in postes %}
+            <tr>
+                <td> {{post.id}}</td>
+                <td> 
+                <a href="{{path('post.show',{id: post.id})}}" >
+                {{post.title}}</td> </a>
+                <td>
+                 <a href='{{path('post.remove',{id: post.id})}}'class="btn btn-danger">Delete </a></td> 
+            <tr>
+        {% endfor %}
+   
+   </table>
 </div>
 {% endblock %}
