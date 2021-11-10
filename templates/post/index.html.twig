@@ -38,7 +38,7 @@
         {% for post in postes %}
             <tr>
                 <td> {{post.id}}</td>
-                {% if post.title == "firas" %}
+                {% if post.title == "Developpeur web" %}
                 <td > 
                 <a style="color:red;" href="{{path('post.show',{id: post.id})}}" >
                 {{post.title}}</a>
