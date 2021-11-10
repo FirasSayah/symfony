@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Controller;
-use App\Entity\Post;
-use App\Repository\PostRepository;
+use App\Entity\Job;
+use App\Repository\JobRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\PostFormType;
+use App\Form\JobType;
 
 
 /**
@@ -18,14 +18,19 @@ class PostController extends AbstractController
 {
     /**
      * @Route("/", name="post")
-     * @param PostRepository $postRepository
+     * @param JobRepository $postRepository
      * @param  Response
      */
-    public function index(PostRepository $postRepository)
+    public function index(JobRepository $postRepository)
     {
         $posts = $postRepository->findAll();
+        $mymenu =array(
+            ['route'=>'job','institule'=>'acceuil'],
+            ['route'=>'create','institule'=>'Ajouter un job'],
+            ['route'=>'remove','institule'=>'Supprimer un job']
+        );
         return $this->render('post/index.html.twig', [
-            'postes' => $posts,
+            'postes' => $posts,'mymenu'=>$mymenu
         ]);
     }
      /**
@@ -35,14 +40,14 @@ class PostController extends AbstractController
 
     public function create(Request $request){
 
-        $post = new Post();
-        $form = $this->createForm(PostFormType::class, $post);
+        $job = new Job();
+        $form = $this->createForm(JobType::class, $job);
         $form->handleRequest($request);
         if($form->isSubmitted()){ 
             
         
         $em = $this->getDoctrine()->getManager();
-        $em->persist($post);
+        $em->persist($job);
         $em->flush();
         return $this->redirect($this->generateUrl('post.post'));
 
@@ -61,24 +66,24 @@ class PostController extends AbstractController
      * @param Request $request
      */
 
-    public function show($id,PostRepository $postRepository){
-            $post = $postRepository->find($id);
+    public function show($id,JobRepository $postRepository){
+            $job = $postRepository->find($id);
 
 
         return $this->render('post/show.html.twig',
-        ['post'=>$post]);
+        ['post'=>$job]);
     }
      /**
      * @Route("/remove/{id}", name="remove")
      * @param Request $request
      */
 
-     public function remove($id,PostRepository $postRepository):Response 
+     public function remove($id,JobRepository $postRepository):Response 
 
      {
         $em = $this->getDoctrine()->getManager();
-        $post = $postRepository->findOneById($id);
-        $em->remove($post);
+        $job = $postRepository->findOneById($id);
+        $em->remove($job);
         $em->flush();
 
         return $this->redirect($this->generateUrl('post.post'));

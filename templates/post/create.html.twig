@@ -2,11 +2,15 @@
 {% extends 'base.html.twig' %}
 {% block  body%}
 
-<div class="container m-4">
+<div class="container">
 {{ form_start(form) }}
     
-
+  <div  style="color:red;">
   {{ form_row(form.title) }}
+  </div>
+  {{ form_row(form.salaire) }}
+  {{ form_row(form.paye) }}
+  {{ form_row(form.type) }}
   <div class=" m-4">
    {{ form_row(form.save) }}
 </div>
