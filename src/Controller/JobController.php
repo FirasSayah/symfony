@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\JobRepository;
 
 class JobController extends AbstractController
 {
@@ -34,9 +35,17 @@ class JobController extends AbstractController
        //return new Response("hello my new name ".$id);
     }
 
-    public function ajouter($nom){
-        
-    }
+    
+    /**
+     * @Route("/home", name="home")
+     */
 
+     public function home(JobRepository $postRepository){
+        $posts = $postRepository->findAll();
+
+         return $this->render('job/home.html.twig',[
+            'postes' => $posts
+         ]);
+     }
 
 }
