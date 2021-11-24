@@ -9,6 +9,12 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\DescriptionRepository;
 use App\Form\DescriptionType;
 use App\Entity\Description;
+use App\Repository\UserInofrmationRepository;
+
+use App\Entity\UserInofrmation;
+use App\Form\InformationType;
+
+
 /**
      * @Route("/description", name="description.")
      */
@@ -20,9 +26,16 @@ class DescriptionController extends AbstractController
      */
     public function index(DescriptionRepository $description): Response
     {
+        $mymenu =array(
+            ['route'=>'post','institule'=>'Home'],
+            ['route'=>'create','institule'=>'Contact us'],
+            ['route'=>'remove','institule'=>'Register'],
+            ['route'=>'post','institule'=>'Sign up']
+           
+        );
         $descrip = $description->findAll();
         return $this->render('job/home.html.twig', [
-            'descriptions' => $descrip
+            'descriptions' => $descrip, 'mymenu'=>$mymenu
         ]);
     }
     /**
@@ -50,4 +63,40 @@ class DescriptionController extends AbstractController
 );
 
  }
+
+ /**
+     * @Route("/register", name="register")
+     * @param Request $request
+     */
+public function register(Request $request){
+
+        $user = new UserInofrmation();
+        $form = $this->createForm(InformationType::class, $user);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){ 
+            
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $this->redirect($this->generateUrl('job.login'));
+
+    }
+
+      return $this->render('job/register.html.twig',
+      ['form'=> $form->createView()]
+    );
+    
+}
+/**
+     * @Route("/login", name="login")
+     * @param Request $request
+     */
+public function login(){
+
+   
+    return $this->render('job/login.html.twig');
+    
+}
+
 }

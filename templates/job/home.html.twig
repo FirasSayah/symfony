@@ -1,3 +1,7 @@
+
+<title>{% block title %}home{% endblock %}</title>
+{% block body %}
+
 <style>
 
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
@@ -32,6 +36,7 @@ img {
   max-width: 100%;
   display: block;
   object-fit: cover;
+  max-height:180px;
 }
 
 .card {
@@ -42,7 +47,9 @@ img {
   box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 1em;
   background: #ECE9E6;
-background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+  cursor:pointer;
+  
+ background: linear-gradient(to right, #FFFFFF, #ECE9E6);
 
 }
 
@@ -53,6 +60,7 @@ background: linear-gradient(to right, #FFFFFF, #ECE9E6);
   display: flex;
   flex-direction: column;
   gap: .5rem;
+  max-height:200px;
 }
 
 
@@ -90,6 +98,7 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
   text-transform: capitalize;
 }
 
+
 .card__footer {
   display: flex;
   padding: 1rem;
@@ -109,6 +118,8 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
   color: #666;
 }
 </style>
+{% include ['job/menu.html.twig', 'mymenu'] %}
+
 
 <div class="container">
 {% for descrip in descriptions %}
@@ -135,3 +146,4 @@ background: linear-gradient(to bottom, #ef473a, #cb2d3e);
   
   </div>
 </div>
+{% endblock %}

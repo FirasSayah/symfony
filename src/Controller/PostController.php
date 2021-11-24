@@ -25,11 +25,32 @@ class PostController extends AbstractController
     {
         $posts = $postRepository->findAll();
         $mymenu =array(
-            ['route'=>'job','institule'=>'acceuil'],
-            ['route'=>'create','institule'=>'Ajouter un job'],
-            ['route'=>'remove','institule'=>'Supprimer un job']
+            ['route'=>'post','institule'=>'Home'],
+            ['route'=>'create','institule'=>'Contact us'],
+            ['route'=>'remove','institule'=>'Register'],
+            ['route'=>'post','institule'=>'Sign up']
+           
         );
         return $this->render('post/index.html.twig', [
+            'postes' => $posts,'mymenu'=>$mymenu
+        ]);
+    }
+        /**
+     * @Route("/menu", name="menu")
+     * @param JobRepository $postRepository
+     * @param  Response
+     */
+    public function menu(JobRepository $postRepository)
+    {
+        $posts = $postRepository->findAll();
+        $mymenu =array(
+            ['route'=>'post','institule'=>'Home'],
+            ['route'=>'create','institule'=>'Contact us'],
+            ['route'=>'remove','institule'=>'Register'],
+            ['route'=>'post','institule'=>'Sign up']
+           
+        );
+        return $this->render('job/menu.html.twig', [
             'postes' => $posts,'mymenu'=>$mymenu
         ]);
     }
