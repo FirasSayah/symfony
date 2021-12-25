@@ -1,0 +1,56 @@
+
+<title>{% block title %}home{% endblock %}</title>
+{% block stylesheets %}
+{# 
+ 'encore_entry_link_tags' hathy tnedy par defaut file eli esmou 'app.css' eli mawjoud fi 
+ 'public/'buid' w 'app.css' hoi file ygenrih webpack wa9tli na3mlou 'npm run watch' w 
+ tjebdou contenu  mta3ou men file 'css1.scss' elli mawjoud f 'asset/style'
+#}
+ {{ encore_entry_link_tags('app') }}
+ 
+ {% endblock %}
+{% block body %}
+
+
+
+{#% include ['index/menu.html.twig', 'mymenu'] %#}
+   <div class="container">
+<a href="{{path('job.home')}}" class="btn btn-light">Home</a>
+
+
+  {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash-{{ type }} alert alert-primary" role="alert">
+        <h1>{{message}}</h1>
+                </div>
+            {% endfor %}
+   {% endfor %}
+   
+   <div class="container">
+<div class="card" >
+ <img src="{{vich_uploader_asset(job)|default('/images/products/Default-61c4887ac293e372416607.jpg')}}" alt="{{job.title}}" /> 
+  <div class="card__content">
+
+    <time datetime="2021-03-30" class="card__date">30 März 2021</time>
+    
+    <span class="card__title">{{job.title}}<span>
+     <p class="card__desc">{{job.description}}<p>
+     <a href="{{path('job.home')}}" type="button" class="btn btn-primary float-right">Postuler</a>
+     <a href="{{path('job.edit',{id:job.id})}}" type="button" class="btn btn-success float-right">Edit</a>
+     <a href="#" 
+     onclick = "event.preventDefault(); confirm('Tu a sure de supprimer ce article') &&
+     document.getElementById('supp').submit();"
+      type="button" class="btn btn-danger float-right">Delete</a>
+
+  </div>
+  
+</div>
+  <small >Created By <b>{{job.userA.firstName}} {{job.userA.lastName}}</b></small>
+
+<form id="supp" action ="{{path('job.delete',{id:job.id})}}" method="post">
+  <input type="hidden" name="_token_" value="{{ csrf_token('delete' ~ job.id)}}">
+  <input type="hidden" name="_method" value="DELETE">
+</form>
+
+</div>
+{% endblock %}

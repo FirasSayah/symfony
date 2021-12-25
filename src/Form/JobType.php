@@ -4,20 +4,26 @@ namespace App\Form;
 
 use App\Entity\Job;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 
 class JobType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+       
             ->add('title')
-            ->add('type')
-            ->add('salaire')
-            ->add('paye')
-            ->add('save', SubmitType::class)
+            ->add('description')
+            ->add('imageFile', VichImageType::class, [
+                'label'=>'Image (jpg, png)',
+                'required' => false,
+                'allow_delete' => true,
+                'download_uri' => false,
+            ])
+            
         ;
     }
 

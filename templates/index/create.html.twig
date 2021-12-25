@@ -1,0 +1,20 @@
+
+<title>{% block title %}home{% endblock %}</title>
+
+{% block stylesheets %}
+ {{ encore_entry_link_tags('app') }}
+ {% endblock %}
+{% block body %}
+
+ <div class="container ">
+
+   {% include('index/menu.html.twig') %}
+   <div class="col-md-6 pt-5 mx-auto">
+  {{  include('index/formTamp.html.twig',{contenuBtn : 'Create new job '}) }}
+     {% include('index/footer.html.twig') %}
+     </div>
+
+</div>
+
+
+{% endblock %}
