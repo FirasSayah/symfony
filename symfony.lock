@@ -234,6 +234,15 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "symfony/amazon-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "9648db3ecae5c8a6b1a5f74715d3907124348815"
+        }
+    },
     "symfony/asset": {
         "version": "v4.4.27"
     },
@@ -624,6 +633,9 @@
     },
     "symfony/yaml": {
         "version": "v4.4.29"
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.7.0"
     },
     "theofidry/psysh-bundle": {
         "version": "4.4.0"

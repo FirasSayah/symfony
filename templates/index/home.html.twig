@@ -30,33 +30,36 @@
 
 {% for job in jobs %}
 
-  <div class="card">
-    <div class="card__header">
-      <a href="{{path('job.show',{id:job.id})}}">
-          <img src="{{vich_uploader_asset(job)|default('/images/products/Default-61c4887ac293e372416607.jpg')}}" alt="{{job.title}}" class="card__image" width="600"/> 
-          {#<img src="https://media.bitdegree.org/storage/media/images/2018/08/what-is-a-web-developer.jpg" alt="card__image" class="card__image" width="600">
-     #}
-      </a>
-    </div>
-    <div class="card__body">
-      <span class="tag tag-blue">{{job.title}}</span>
-      <h4>{{job.title}} </h4>
-      <p>{{job.description| u.truncate(60,'...', false)}}</p>
-    </div>
-    <div class="card__footer">
-      <div class="user">
-        <div class="user__info">
-          <h5>{{job.id}} TND</h5>
-          <small>Created By <b>{{job.userA.firstName}} {{job.userA.lastName}}</b></small>
+  <div class="card" style="display: inline-block;">
+      <div class="card__header">
+          <a href="{{path('job.show',{id:job.id})}}">
+              <img src="{{vich_uploader_asset(job)|default('/images/products/Default-61c4887ac293e372416607.jpg')}}" alt="{{job.title}}" class="card__image" width="600"/> 
+              {#<img src="https://media.bitdegree.org/storage/media/images/2018/08/what-is-a-web-developer.jpg" alt="card__image" class="card__image" width="600">
+        #}
+          </a>
+      </div>
+      <div class="card__body">
+          <span class="tag tag-blue">{{job.title}}</span>
+          <h4>{{job.title}} </h4>
+          <p>{{job.description| u.truncate(60,'...', false)}}</p>
+      </div>
+      <div class="card__footer">
+        <div class="user">
+          <div class="user__info">
+            <h5>{{job.id}} TND</h5>
+            <small>Created By <b>{{job.userA.firstName}} {{job.userA.lastName}}</b></small>
+          </div>
         </div>
       </div>
-    </div>
   </div>
+  
 
   {% endfor %}
   
   </div>
+  
 </div>
    {% include('index/footer.html.twig') %}
+   
 
 {% endblock %}
